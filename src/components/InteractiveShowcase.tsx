@@ -70,7 +70,7 @@ const flavors = [
   },
 ];
 
-export default function InteractiveShowcase({ ready }: InteractiveShowcaseProps) {
+export default function InteractiveShowcase({ ready = true }: InteractiveShowcaseProps) {
   const masterContainerRef = useRef<HTMLDivElement>(null);
   const pinTriggerRef = useRef<HTMLDivElement>(null);
   const heroTextRef = useRef<HTMLDivElement>(null);
@@ -259,7 +259,7 @@ export default function InteractiveShowcase({ ready }: InteractiveShowcaseProps)
           {/* Main Hero Green Apple Can */}
           <div
             ref={heroCanRef}
-            className="absolute right-3 sm:right-[14rem] lg:right-[17.5rem] top-[42%] sm:top-0 bottom-auto sm:bottom-0 my-0 sm:my-auto w-44 sm:w-60 lg:w-72 h-[320px] sm:h-[420px] lg:h-[480px] pointer-events-auto cursor-pointer group"
+            className="absolute right-3 sm:right-[11rem] md:right-[12.5rem] lg:right-[14rem] top-[42%] sm:top-0 bottom-auto sm:bottom-0 my-0 sm:my-auto w-44 sm:w-60 lg:w-72 h-[320px] sm:h-[420px] lg:h-[480px] pointer-events-auto cursor-pointer group"
           >
             <div className="hero-can-enter w-full h-full">
               <div className="hero-can-float w-full h-full relative">
@@ -277,7 +277,7 @@ export default function InteractiveShowcase({ ready }: InteractiveShowcaseProps)
           {/* Secondary Hero Citrus Can */}
           <div
             ref={secondaryCanRef}
-            className="hidden sm:block absolute right-0 sm:-right-4 lg:right-0 top-[14%] sm:top-[17%] w-40 sm:w-56 lg:w-64 h-[300px] sm:h-[380px] lg:h-[420px] pointer-events-auto cursor-pointer group"
+            className="hidden sm:block absolute right-0 sm:right-2 lg:right-4 top-[14%] sm:top-[16%] w-44 sm:w-64 lg:w-72 h-[330px] sm:h-[410px] lg:h-[460px] pointer-events-auto cursor-pointer group"
           >
             <div className="hero-can-enter w-full h-full">
               <div className="hero-can-float w-full h-full relative">

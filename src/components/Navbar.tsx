@@ -22,7 +22,7 @@ interface NavbarProps {
   ready?: boolean;
 }
 
-export default function Navbar({ ready }: NavbarProps) {
+export default function Navbar({ ready = true }: NavbarProps) {
   const navRef = useRef<HTMLElement>(null);
   const lenis = useLenis();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
