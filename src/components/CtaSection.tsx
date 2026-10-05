@@ -10,9 +10,9 @@ import { motion, type Variants } from "framer-motion";
 import { ShoppingBag, Check, Truck, RefreshCw } from "lucide-react";
 
 const packOptions = [
-  { count: 12, label: "12-Pack Variety", price: "$29.99", discount: "Popular" },
-  { count: 24, label: "24-Pack Variety", price: "$49.99", discount: "Save 20%" },
-  { count: 48, label: "48-Pack Master Case", price: "$89.99", discount: "Best Value" },
+  { count: 12, label: "12-Pack Variety", price: "AED 109", discount: "Popular" },
+  { count: 24, label: "24-Pack Variety", price: "AED 179", discount: "Save 20%" },
+  { count: 48, label: "48-Pack Master Case", price: "AED 329", discount: "Best Value" },
 ];
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -70,7 +70,7 @@ export default function CtaSection() {
               </span>
             </motion.h2>
             <motion.p variants={rise} className="text-stone-600 text-xs sm:text-base mt-3 font-medium">
-              Select your preferred pack size below. Free expedited cold shipping on all orders over $40.
+              Select your preferred pack size below. Free expedited cold shipping on all orders over AED 150.
             </motion.p>
           </div>
 
