@@ -7,6 +7,7 @@
 import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import { useLenis } from "lenis/react";
+import { usePathname } from "next/navigation";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -21,15 +22,18 @@ const rise: Variants = {
 };
 
 const footerLinks = [
-  { href: "#hero", label: "Overview" },
-  { href: "#flavors", label: "Flavors" },
-  { href: "#specs", label: "Ingredients" },
+  { href: "/#hero", label: "Overview" },
+  { href: "/#flavors", label: "Flavors" },
+  { href: "/#specs", label: "Ingredients" },
 ];
 
 export default function Footer() {
   const lenis = useLenis();
+  const isHome = usePathname() === "/";
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, target: string) => {
+    // On other pages, let the Link navigate to the home page section
+    if (!isHome) return;
     e.preventDefault();
 
     if (target === "#hero") {
@@ -78,7 +82,7 @@ export default function Footer() {
           {/* Links using Next.js Link component */}
           <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-sm font-semibold text-stone-600">
             {footerLinks.map((l) => (
-              <Link key={l.href} href={l.href} onClick={(e) => handleNavClick(e, l.href)} className="hover:text-emerald-700 transition-colors">
+              <Link key={l.href} href={l.href} onClick={(e) => handleNavClick(e, l.href.slice(1))} className="hover:text-emerald-700 transition-colors">
                 {l.label}
               </Link>
             ))}

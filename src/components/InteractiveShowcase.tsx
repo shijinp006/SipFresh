@@ -181,30 +181,30 @@ export default function InteractiveShowcase({ ready = true }: InteractiveShowcas
       masterTl.to(entrances[0], { rotate: 0, duration: 1 }, 0);
       masterTl.fromTo(secondaryCanRef.current, { y: 0, opacity: 1 }, { y: "-110vh", opacity: 0, duration: 1 }, 0);
       masterTl.fromTo(bgTexts[0], { opacity: 0, scale: 1.3 }, { opacity: 1, scale: 1, duration: 1 }, 0);
-      // Green Apple Sketch Entrance
-      masterTl.fromTo(sketchItems[0], { opacity: 0, scale: 0.6, rotate: -60 }, { opacity: 1, scale: 1, rotate: 0, duration: 1 }, 0);
+      // Green Apple sketch background fades/zooms in
+      masterTl.fromTo(sketchItems[0], { opacity: 0, scale: 1.15 }, { opacity: 1, scale: 1, duration: 1 }, 0);
       // Seamless hand-off: hero can disappears the instant the showcase can appears at the same spot
       masterTl.set(canItems[0], { opacity: 0 }, 0);
       masterTl.to(canItems[0], { opacity: 1, duration: 0.02, ease: "none" }, 1);
       masterTl.to(heroCanRef.current, { opacity: 0, duration: 0.02, ease: "none" }, 1);
 
-      // PHASE 2 (1.8 -> 2.8): Midnight Blueberry transition (Clockwise rotation of corner sketches)
+      // PHASE 2 (1.8 -> 2.8): Midnight Blueberry transition (sketch backgrounds crossfade)
       masterTl.to(bgTexts[0], { opacity: 0, scale: 0.85, duration: 0.5, ease: "power1.in" }, 1.8);
       masterTl.to(canItems[0], { opacity: 0, scale: 0.7, rotate: -20, y: -60, duration: 0.5, ease: "power1.in" }, 1.8);
-      masterTl.to(sketchItems[0], { opacity: 0, scale: 0.5, rotate: 180, duration: 0.5, ease: "power1.in" }, 1.8);
+      masterTl.to(sketchItems[0], { opacity: 0, scale: 0.92, duration: 0.5, ease: "power1.in" }, 1.8);
 
       masterTl.fromTo(bgTexts[1], { opacity: 0, scale: 1.15 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power1.out" }, 1.8 + 0.5);
       masterTl.fromTo(canItems[1], { opacity: 0, scale: 0.7, rotate: 20, y: 60 }, { opacity: 1, scale: 1, rotate: 0, y: 0, duration: 0.6, ease: "power2.out" }, 1.8 + 0.5);
-      masterTl.fromTo(sketchItems[1], { opacity: 0, scale: 0.5, rotate: 0 }, { opacity: 1, scale: 1, rotate: 180, duration: 0.6, ease: "power2.out" }, 1.8 + 0.5);
+      masterTl.fromTo(sketchItems[1], { opacity: 0, scale: 1.15 }, { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" }, 1.8 + 0.5);
 
-      // PHASE 3 (3.6 -> 4.6): Citrus Fusion transition (Clockwise rotation of corner sketches)
+      // PHASE 3 (3.6 -> 4.6): Citrus Fusion transition (sketch backgrounds crossfade)
       masterTl.to(bgTexts[1], { opacity: 0, scale: 0.85, duration: 0.5, ease: "power1.in" }, 3.6);
       masterTl.to(canItems[1], { opacity: 0, scale: 0.7, rotate: -20, y: -60, duration: 0.5, ease: "power1.in" }, 3.6);
-      masterTl.to(sketchItems[1], { opacity: 0, scale: 0.5, rotate: 360, duration: 0.5, ease: "power1.in" }, 3.6);
+      masterTl.to(sketchItems[1], { opacity: 0, scale: 0.92, duration: 0.5, ease: "power1.in" }, 3.6);
 
       masterTl.fromTo(bgTexts[2], { opacity: 0, scale: 1.15 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power1.out" }, 3.6 + 0.5);
       masterTl.fromTo(canItems[2], { opacity: 0, scale: 0.7, rotate: 20, y: 60 }, { opacity: 1, scale: 1, rotate: 0, y: 0, duration: 0.6, ease: "power2.out" }, 3.6 + 0.5);
-      masterTl.fromTo(sketchItems[2], { opacity: 0, scale: 0.5, rotate: 180 }, { opacity: 1, scale: 1, rotate: 360, duration: 0.6, ease: "power2.out" }, 3.6 + 0.5);
+      masterTl.fromTo(sketchItems[2], { opacity: 0, scale: 1.15 }, { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" }, 3.6 + 0.5);
 
       // brief hold on the last flavor before unpinning
       masterTl.to({}, { duration: 0.6 });
@@ -293,6 +293,22 @@ export default function InteractiveShowcase({ ready = true }: InteractiveShowcas
           </div>
         </div>
 
+        {/* BOTANICAL SKETCH BACKGROUND (large sketches in the top-right & bottom-left corners per flavor) */}
+        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+          {flavors.map((f) => (
+            <div key={`sketch-${f.id}`} className="sketch-item absolute inset-0 opacity-0">
+              {/* Top Right */}
+              <div className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 w-[22vw] sm:w-[14vw] lg:w-[12vw] max-w-[190px] aspect-square opacity-80">
+                <Image src={f.sketchImage} alt="" fill sizes="(max-width: 640px) 22vw, 14vw" className="object-contain" />
+              </div>
+              {/* Bottom Left (rotated 180° so it mirrors the top-right one) */}
+              <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 w-[22vw] sm:w-[14vw] lg:w-[12vw] max-w-[190px] aspect-square opacity-80 rotate-180">
+                <Image src={f.sketchImage} alt="" fill sizes="(max-width: 640px) 22vw, 14vw" className="object-contain" />
+              </div>
+            </div>
+          ))}
+        </div>
+
         {/* HUGE BOLD BACKGROUND TEXT (Expands behind the centered can during scroll) */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-0">
           {flavors.map((f, idx) => (
@@ -302,56 +318,6 @@ export default function InteractiveShowcase({ ready = true }: InteractiveShowcas
             >
               {f.bgText}
             </h2>
-          ))}
-        </div>
-
-        {/* BOTANICAL SKETCH ACCENTS (Positioned in 4 Corners with Clockwise Rotation Scrub) */}
-        <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
-          {flavors.map((f, idx) => (
-            <div
-              key={`sketch-${f.id}`}
-              className="sketch-item absolute inset-0 w-full h-full opacity-0 pointer-events-none"
-            >
-              {/* Corner 1: Top Left */}
-              <div className="absolute top-6 left-6 sm:top-10 sm:left-10 w-28 sm:w-36 md:w-44 lg:w-52 h-28 sm:h-36 md:h-44 lg:h-52 opacity-80">
-                <Image
-                  src={f.sketchImage}
-                  alt={`${f.title} sketch top left`}
-                  fill
-                  className="object-contain"
-                />
-              </div>
-
-              {/* Corner 2: Top Right */}
-              <div className="absolute top-6 right-6 sm:top-10 sm:right-10 w-28 sm:w-36 md:w-44 lg:w-52 h-28 sm:h-36 md:h-44 lg:h-52 opacity-80 scale-x-[-1]">
-                <Image
-                  src={f.sketchImage}
-                  alt={`${f.title} sketch top right`}
-                  fill
-                  className="object-contain"
-                />
-              </div>
-
-              {/* Corner 3: Bottom Left */}
-              <div className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 w-28 sm:w-36 md:w-44 lg:w-52 h-28 sm:h-36 md:h-44 lg:h-52 opacity-80 scale-y-[-1]">
-                <Image
-                  src={f.sketchImage}
-                  alt={`${f.title} sketch bottom left`}
-                  fill
-                  className="object-contain"
-                />
-              </div>
-
-              {/* Corner 4: Bottom Right */}
-              <div className="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 w-28 sm:w-36 md:w-44 lg:w-52 h-28 sm:h-36 md:h-44 lg:h-52 opacity-80 scale-[-1]">
-                <Image
-                  src={f.sketchImage}
-                  alt={`${f.title} sketch bottom right`}
-                  fill
-                  className="object-contain"
-                />
-              </div>
-            </div>
           ))}
         </div>
 
