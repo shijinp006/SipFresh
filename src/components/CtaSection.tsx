@@ -7,7 +7,7 @@
  */
 import { useState } from "react";
 import { motion, type Variants } from "framer-motion";
-import { ShoppingBag, Check, Sparkles, Truck, RefreshCw } from "lucide-react";
+import { ShoppingBag, Check, Truck, RefreshCw } from "lucide-react";
 
 const packOptions = [
   { count: 12, label: "12-Pack Variety", price: "$29.99", discount: "Popular" },
@@ -63,20 +63,7 @@ export default function CtaSection() {
           viewport={{ once: true, amount: 0.1 }}
         >
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <motion.span
-              variants={rise}
-              className="inline-flex items-center gap-2 text-xs font-mono font-bold tracking-widest text-emerald-800 uppercase bg-emerald-100/80 border border-emerald-600/20 px-4 py-1.5 rounded-full shadow-sm"
-            >
-              <motion.span
-                className="inline-flex"
-                animate={{ rotate: [0, 20, -20, 0], scale: [1, 1.25, 1] }}
-                transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-              </motion.span>
-              DIRECT TO YOUR DOORSTEP
-            </motion.span>
-            <motion.h2 variants={rise} className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight uppercase leading-[0.95] mt-4 text-stone-900">
+            <motion.h2 variants={rise} className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight uppercase leading-[0.95] text-stone-900">
               Ready to Sip{" "}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-700 via-teal-700 to-emerald-900">
                 Better?
