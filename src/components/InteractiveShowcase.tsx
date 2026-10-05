@@ -70,6 +70,9 @@ const flavors = [
   },
 ];
 
+// Resting tilt (deg) of the hero apple can, before it straightens up while gliding into the showcase
+const APPLE_HERO_TILT = -20;
+
 export default function InteractiveShowcase({ ready = true }: InteractiveShowcaseProps) {
   const masterContainerRef = useRef<HTMLDivElement>(null);
   const pinTriggerRef = useRef<HTMLDivElement>(null);
@@ -102,12 +105,12 @@ export default function InteractiveShowcase({ ready = true }: InteractiveShowcas
       );
       entranceTl.fromTo(
         entrances,
-        { opacity: 0, scale: 0.4, y: 120, rotate: (i) => (i === 0 ? -20 : 20) },
+        { opacity: 0, scale: 0.4, y: 120, rotate: (i) => (i === 0 ? -35 : 20) },
         {
           opacity: 1,
           scale: 1,
           y: 0,
-          rotate: (i) => (i === 0 ? -5 : 6),
+          rotate: (i) => (i === 0 ? APPLE_HERO_TILT : 6),
           duration: 1.2,
           stagger: 0.2,
           ease: "back.out(2.2)",
@@ -178,7 +181,8 @@ export default function InteractiveShowcase({ ready = true }: InteractiveShowcas
         { x: () => landing().x, y: () => landing().y, scale: () => landing().scale, duration: 1, ease: "power2.out" },
         0
       );
-      masterTl.to(entrances[0], { rotate: 0, duration: 1 }, 0);
+      // Explicit start tilt so scrolling back to the top always restores the same hero pose
+      masterTl.fromTo(entrances[0], { rotate: APPLE_HERO_TILT }, { rotate: 0, duration: 1, immediateRender: false }, 0);
       masterTl.fromTo(secondaryCanRef.current, { y: 0, opacity: 1 }, { y: "-110vh", opacity: 0, duration: 1 }, 0);
       masterTl.fromTo(bgTexts[0], { opacity: 0, scale: 1.3 }, { opacity: 1, scale: 1, duration: 1 }, 0);
       // Green Apple sketch background fades/zooms in
@@ -259,7 +263,7 @@ export default function InteractiveShowcase({ ready = true }: InteractiveShowcas
           {/* Main Hero Green Apple Can */}
           <div
             ref={heroCanRef}
-            className="absolute right-3 sm:right-[11rem] md:right-[12.5rem] lg:right-[14rem] top-[42%] sm:top-0 bottom-auto sm:bottom-0 my-0 sm:my-auto w-44 sm:w-60 lg:w-72 h-[320px] sm:h-[420px] lg:h-[480px] pointer-events-auto cursor-pointer group"
+            className="absolute right-3 sm:right-[13rem] md:right-[15rem] lg:right-[13rem] xl:right-[17.5rem] top-[42%] sm:top-0 bottom-auto sm:bottom-0 my-0 sm:my-auto w-44 sm:w-60 lg:w-64 xl:w-72 h-[320px] sm:h-[420px] xl:h-[480px] pointer-events-auto cursor-pointer group"
           >
             <div className="hero-can-enter w-full h-full">
               <div className="hero-can-float w-full h-full relative">
@@ -277,7 +281,7 @@ export default function InteractiveShowcase({ ready = true }: InteractiveShowcas
           {/* Secondary Hero Citrus Can */}
           <div
             ref={secondaryCanRef}
-            className="hidden sm:block absolute right-0 sm:right-2 lg:right-4 top-[14%] sm:top-[16%] w-44 sm:w-64 lg:w-72 h-[330px] sm:h-[410px] lg:h-[460px] pointer-events-auto cursor-pointer group"
+            className="hidden sm:block absolute right-0 sm:right-2 lg:-right-4 xl:right-4 top-[14%] sm:top-[16%] w-44 sm:w-64 xl:w-72 h-[330px] sm:h-[410px] xl:h-[460px] pointer-events-auto cursor-pointer group"
           >
             <div className="hero-can-enter w-full h-full">
               <div className="hero-can-float w-full h-full relative">
