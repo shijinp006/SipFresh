@@ -81,9 +81,12 @@ export default function FlavorSpecs() {
       >
         <motion.h2
           variants={riseVariants}
-          className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-stone-900"
+          className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight uppercase leading-[0.95] text-stone-900"
         >
-          Crafted Without Compromise
+          Crafted Without{" "}
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-700 via-teal-700 to-emerald-900">
+            Compromise
+          </span>
         </motion.h2>
         <motion.p
           variants={riseVariants}

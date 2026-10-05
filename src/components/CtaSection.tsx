@@ -76,8 +76,11 @@ export default function CtaSection() {
               </motion.span>
               DIRECT TO YOUR DOORSTEP
             </motion.span>
-            <motion.h2 variants={rise} className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mt-4 text-stone-900">
-              Ready to Sip Better?
+            <motion.h2 variants={rise} className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight uppercase leading-[0.95] mt-4 text-stone-900">
+              Ready to Sip{" "}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-700 via-teal-700 to-emerald-900">
+                Better?
+              </span>
             </motion.h2>
             <motion.p variants={rise} className="text-stone-600 text-xs sm:text-base mt-3 font-medium">
               Select your preferred pack size below. Free expedited cold shipping on all orders over $40.
